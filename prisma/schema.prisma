@@ -1,0 +1,36 @@
+model Dentist {
+  id               Int      @id @default(autoincrement())
+  name             String
+  specialty        String
+  location         String
+  experience_years Int
+  languages        String[]
+  bio              String?
+  profile_image_url String?
+  consultation_fee Decimal? @db.Decimal(10,2)
+  is_available     Boolean  @default(true)
+  rating           Decimal  @default(0) @db.Decimal(3,2)
+  created_at       DateTime @default(now())
+  education        String?   @map("education")
+  avatar           String?   @map("avatar")
+  reviewCount      Int      @default(0) @map("review_count")
+  priceFrom        Decimal? @db.Decimal(10,2) @map("price_from")
+  offersVideo      Boolean  @default(false) @map("offers_video")
+  offersClinic     Boolean  @default(false) @map("offers_clinic")
+  @@map("dentists")
+}
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
