@@ -5,7 +5,7 @@ dotenv.config();
 import express, { type Request, Response, NextFunction } from "express";
 import session from "express-session";
 import { registerRoutes } from "./routes";
-import { serveStatic, log } from "./static";
+import { log } from "./static";
 
 const app = express();
 app.use(express.json());
@@ -66,9 +66,10 @@ app.use((req, res, next) => {
 
   if (app.get("env") === "development") {
     // Dynamically import Vite setup only in development
-    const { setupVite } = await import("./vite");
+    const { setupVite } = await import("./vite.js");
     await setupVite(app, server);
   } else {
+    const { serveStatic } = await import("./static.js");
     serveStatic(app);
   }
 
