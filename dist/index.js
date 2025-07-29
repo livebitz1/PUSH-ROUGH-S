@@ -1483,10 +1483,10 @@ app.use((req, res, next) => {
     const { serveStatic: serveStatic2 } = await Promise.resolve().then(() => (init_static(), static_exports));
     serveStatic2(app);
   }
-  const port = parseInt(process.env.PORT || "5000", 10);
+  const port = process.env.PORT ? parseInt(process.env.PORT, 10) : 5e3;
   server.listen({
     port,
-    host: "127.0.0.1"
+    host: "0.0.0.0"
   }, () => {
     log(`serving on port ${port}`);
   });

@@ -117,7 +117,7 @@ export default function Products() {
     createOrderMutation.mutate(orderData);
   };
 
-  const filteredProducts = products?.filter(product => 
+  const filteredProducts = products?.filter((product: Product) => 
     product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
     product.description?.toLowerCase().includes(searchTerm.toLowerCase())
   ) || [];

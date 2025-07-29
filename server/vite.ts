@@ -56,6 +56,4 @@ export async function setupVite(app: Express, server: Server) {
   });
 }
 
-  // serveStatic has been moved to static.ts for production use
-  throw new Error("serveStatic should not be imported from vite.ts in production. Use static.ts instead.");
-}
+
